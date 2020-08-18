@@ -1,0 +1,33 @@
+1) This is base64 encoding, is not a chiper but only a way to represent binary data in an ASCII string.'
+
+2)"Very good, you're able to decrypt a fixed _OR! One of the first basic stream chiper."
+
+3) La poesia è il Sabato del villaggio di Leopardi
+
+4) tutte e 4 sono integre
+
+5) i: ('Q', 'a', '4', 'q') 
+
+6) 
+The password of user  user1 is: laser
+The password of user  user2 is: linux
+The password of user  user3 is: bugs
+The password of user  user4 is: hack
+The password of user  user5 is: apple
+The password of user  user6 is:         
+The password of user  user7 is: admin
+The password of user  user8 is: locky
+The password of user  user9 is: key
+The password of user  user10 is: cyber
+The password of user  user11 is: crypt
+The password of user  user12 is: print
+The password of user  user13 is: macos
+The password of user  user14 is: quick
+The password of user  user15 is: gate
+The password of user  user16 is: phone
+The password of user  user17 is: cost
+The password of user  user18 is: virus
+The password of user  user19 is: pwned
+The password of user  admin is: crack
+
+

@@ -1,0 +1,3 @@
+nmap --interactive
+!sh 
+whoami

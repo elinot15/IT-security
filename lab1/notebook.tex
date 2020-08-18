@@ -1,0 +1,758 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{lab1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{laboratorio-1}{%
+\section{Laboratorio 1}\label{laboratorio-1}}
+
+    \hypertarget{esercizio-1-base64}{%
+\section{Esercizio \# 1: Base64}\label{esercizio-1-base64}}
+
+    Base64 schemi di codifica sono comunemente utilizzati quando v'è la
+necessità di codificare i dati binari che hanno l'esigenze essere
+memorizzati e trasferiti su supporti che sono progettati per trattare
+con i dati testuali. Questo per garantire che i dati rimangano intatti
+senza modifiche durante il trasporto. Base64 è usato comunemente in un
+certo numero di applicazioni, tra cui e-mail tramite MIME, e per
+memorizzazione dati complessi in XML o JSON. Decodificare il seguente
+testo:
+
+VGhpcyBpcyBiYXNlNjQgZW5jb2RpbmcsIGlzIG5vdCBhIGNoaXBlciBidXQgb25seSBhIHd
+heSB0byByZXByZXNlbnQgYmluYXJ5IGRhdGEgaW4gYW4gQVNDSUkgc3RyaW5nLg ==
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{base64}
+        
+        \PY{n}{c}\PY{o}{=}\PY{n}{base64}\PY{o}{.}\PY{n}{b64decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VGhpcyBpcyBiYXNlNjQgZW5jb2RpbmcsIGlzIG5vdCBhIGNoaXBlciBidXQgb25seSBhIHdheSB0byByZXByZXNlbnQgYmluYXJ5IGRhdGEgaW4gYW4gQVNDSUkgc3RyaW5nLg==}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+b'This is base64 encoding, is not a chiper but only a way to represent binary data in an ASCII string.'
+
+    \end{Verbatim}
+
+    \hypertarget{esercizio-2-stream-cipher}{%
+\section{Esercizio \# 2: Stream
+cipher}\label{esercizio-2-stream-cipher}}
+
+    Un flusso di cifratura è un algoritmo di crittografia che cifra 1 bit o
+di byte di testo in chiaro al momento. Esso utilizza un flusso infinito
+di bit pseudocasuali come chiave. Per un Stream cipher l'implementazione
+per rimanere sicuro, il suo generatore pseudo dovrebbe essere
+imprevedibile e la chiave non deve mai essere riutilizzato. Il seguente
+file crypt.txt (all'interno della cartella 02\_stream\_chiper) è stato
+crittografato utilizzando il più famoso Stream cipher codifica
+l'algoritmo con la chiave contenuta nel file di key.txt. Recuperare il
+testo in chiaro originale.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{encrypted}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crypt.txt}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{key}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key.txt}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{key}\PY{o}{=}\PY{n}{key}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}
+        \PY{n}{encrypted}\PY{o}{=}\PY{n}{encrypted}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}
+        \PY{n}{decrypted}\PY{o}{=}\PY{n+nb}{bytearray}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{for} \PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{val}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip} \PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{encrypted}\PY{p}{)}\PY{p}{:}
+            \PY{n}{decrypted}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{k}\PY{o}{\PYZca{}}\PY{n}{val}\PY{p}{)}
+        
+        \PY{n}{decrypted}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} "Very good, you're able to decrypt a fixed \_OR! One of the first basic stream chiper."
+\end{Verbatim}
+            
+    \hypertarget{exercise-3-substitution-cipher}{%
+\section{Exercise \#3: Substitution
+cipher}\label{exercise-3-substitution-cipher}}
+
+    È ben noto che la monoalfabetica Substitution cipher (noto anche come
+monoalfabetica cipher) non è sicura, perché può essere sottoposto ad
+analisi di frequenza. In questo laboratorio, si è dato un cipher-text
+che viene cifrato usando un codice monoalfabetico; cioè, ogni lettera
+del testo originale è sostituita da un'altra lettera, in cui la
+sostituzione non varia (cioè, una lettera è sempre sostituita dalla
+stessa lettera durante la crittografia). Il vostro compito è quello di
+trovare il testo originale utilizzando l'analisi di frequenza e la
+chiave di crittografia. E 'noto che il testo originale è una poesia
+italiana. Noi manteniamo gli spazi tra le parole, in modo da poter
+ancora vedere i confini delle parole del testo cifrato. In crittografia
+reale utilizzando la monoalfabetica cipher, saranno rimossi gli spazi.
+Teniamo anche lettere maiuscole.
+
+Linee guida: utilizzando l'analisi in frequenza, si può scoprire il
+testo in chiaro per alcuni dei personaggi è abbastanza facile. Per quei
+personaggi, si consiglia di cambiare di nuovo al suo plaintext, così si
+può essere in grado di ottenere più indizi. È meglio usare lettere
+maiuscole nel plaintext, quindi per la stessa lettera, sappiamo qual'è
+plaintext qual'è ciphertext.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{n}{ciphertext}\PY{o}{=}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ciphertext.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ciphertext}\PY{o}{=}\PY{n}{ciphertext}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ciphertext}\PY{o}{=}\PY{n}{ciphertext}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{res} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{i} \PY{p}{:} \PY{n}{ciphertext}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{set}\PY{p}{(}\PY{n}{ciphertext}\PY{p}{)} \PY{k}{if}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{isalpha}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{freq}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n}{res}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freq.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{freq}\PY{o}{=}\PY{n}{freq}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freq.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{freq}\PY{o}{=}\PY{n}{freq}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ciphertext}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}
+        
+        \PY{n}{d\PYZus{}ita}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{11.74}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.92}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{4.50}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{3.73}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{11.79}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{1.64}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{1.54}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{11.28}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{6.51}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{2.51}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{6.88}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{9.83}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{3.05}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.51}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{6.37}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{4.98}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{5.62}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{3.01}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{2.10}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.49}\PY{p}{\PYZcb{}}
+        \PY{n}{freq\PYZus{}ita}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n}{d\PYZus{}ita}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freq.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{freq\PYZus{}ita}\PY{o}{=}\PY{n}{freq\PYZus{}ita}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freq.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ciphertext}\PY{o}{=}\PY{n}{ciphertext}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{freq}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{n}{freq\PYZus{}ita}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}\PY{p}{)} 
+        \PY{n}{ciphertext}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{d\PYZus{}prova}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{j}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{cip}\PY{o}{=}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ciphertext.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{cip}\PY{o}{=}\PY{n}{cip}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cip}\PY{o}{=}\PY{n}{cip}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         \PY{n}{prova}\PY{o}{=}\PY{n}{cip}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cip}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{d\PYZus{}prova}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+la donzelletta vien dalla capagna in sul calar del sole  col suo fascio dell erba  e reca in ano un azzolin di rose e viole  onde  siccoe suole  ornare ella si appresta diani  al d  di festa  il petto e il crine   iede con le vicine su la scala a filar la vecc ierella  incontro l  dove si perde il giorno  e novellando vien del suo buon tepo   uando ai d  della festa ella si ornava  ed ancor sana e snella solea danzar la sera intra di  uei c  ebbe copagni nell et  pi  bella   i  tutta l aria ibruna  torna azzurro il sereno  e tornan l obre gi  da  colli e da  tetti  al bianc eggiar della recente luna   r la s uilla d  segno della festa c e viene  ed a  uel suon diresti c e il cor si riconforta    fanciulli gridando su la piazzuola in frotta  e  ua e l  saltando  fanno un lieto roore  e intanto riede alla sua parca ensa  fisc iando  il zappatore  e seco pensa al d  del suo riposo   oi  uando intorno   spenta ogni altra face  e tutto l altro tace  odi il artel picc iare  odi la sega del legnaiuol  c e veglia nella c iusa bottega alla lucerna  e s affretta  e s adopra di fornir l opra anzi al c iarir dell alba   uesto di sette   il pi  gradito giorno  pien di spee e di gioia  dian tristezza e noia rec eran l ore  ed al travaglio usato ciascuno in suo pensier far  ritorno   arzoncello sc erzoso  cotesta et  fiorita   coe un giorno d allegrezza pieno  giorno c iaro  sereno  c e precorre alla festa di tua vita   odi  fanciullo io  stato soave  stagion lieta   cotesta   ltro dirti non vo   a la tua festa c  anco tardi a venir non ti sia grave 
+    \end{Verbatim}
+
+    +\# Hash functions
+
+    \hypertarget{exercise-4-integrity-checks}{%
+\section{Exercise \#4: Integrity
+checks}\label{exercise-4-integrity-checks}}
+
+    Tutti i file ricevuti da una risorsa esterna possono essere danneggiati,
+ad esempio quando vengono scaricati da internet (a causa di errore di
+trasmissione), quando un dispositivo di memorizzazione guasto o peggio
+quando un aggressore cambia il suo contenuto. Un modo per garantire che
+i programmi o file non siano stati danneggiati o manomessi è quello di
+calcolare il loro valore di hash e poi fare il confronto con il checksum
+fornita dalla sorgente. Se hash matcha, allora avete un ragionevole
+grado di fiducia che il file è stato scaricato è esattamente lo stesso
+di quello dichiarato dalla sorgente. Se non lo è, allora il file è stato
+modificato in qualche modo. All'interno 04\_integrity\_checks cartella
+c'è un file PDF e hash precalcolato, si può controllare la propria
+integrità?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kn}{import} \PY{n+nn}{base64}
+         \PY{k+kn}{import} \PY{n+nn}{hashlib} 
+         
+         \PY{n}{encoded\PYZus{}string}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PE\PYZus{}Format\PYZus{}Walkthrough.pdf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{encoded\PYZus{}string} \PY{o}{=}  \PY{n}{encoded\PYZus{}string}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{hash\PYZus{}string\PYZus{}md5}\PY{o}{=}\PY{n}{hashlib}\PY{o}{.}\PY{n}{md5}\PY{p}{(}\PY{n}{encoded\PYZus{}string}\PY{p}{)}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+         \PY{n}{hash\PYZus{}string\PYZus{}sha1}\PY{o}{=}\PY{n}{hashlib}\PY{o}{.}\PY{n}{sha1}\PY{p}{(}\PY{n}{encoded\PYZus{}string}\PY{p}{)}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+         \PY{n}{hash\PYZus{}string\PYZus{}sha256}\PY{o}{=} \PY{n}{hashlib}\PY{o}{.}\PY{n}{sha256}\PY{p}{(}\PY{n}{encoded\PYZus{}string}\PY{p}{)}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+         \PY{n}{hash\PYZus{}string\PYZus{}sha512}\PY{o}{=}\PY{n}{hashlib}\PY{o}{.}\PY{n}{sha512}\PY{p}{(}\PY{n}{encoded\PYZus{}string}\PY{p}{)}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{md5}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{checksum.md5}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sha1}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{checksum.sha1}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sha256}\PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{checksum.sha256}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sha512}\PY{o}{=}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{checksum.sha512}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{elenco}\PY{o}{=} \PY{p}{[}\PY{n}{hash\PYZus{}string\PYZus{}md5}\PY{o}{==}\PY{n}{md5}\PY{p}{,} \PY{n}{hash\PYZus{}string\PYZus{}sha1}\PY{o}{==}\PY{n}{sha1}\PY{p}{,} 
+                  \PY{n}{hash\PYZus{}string\PYZus{}sha256}\PY{o}{==}\PY{n}{sha256}\PY{p}{,} \PY{n}{hash\PYZus{}string\PYZus{}sha512}\PY{o}{==}\PY{n}{sha512}\PY{p}{]}
+         \PY{n}{elenco}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} [True, True, True, True]
+\end{Verbatim}
+            
+    \hypertarget{exercise-5-hash-forcing}{%
+\section{Exercise \#5: Hash forcing}\label{exercise-5-hash-forcing}}
+
+    Scrivere uno script python che è in grado di determinare un valore tale
+che H (i) = 00000xxxxxxxxxxxxxxxx, dove H è la funzione di hash SHA-1.
+Il numero minimo di zeri accettata è 3. Lo studente è tenuto a fornire
+il valore di i.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{k+kn}{import} \PY{n+nn}{itertools} \PY{k}{as} \PY{n+nn}{it}
+         \PY{c+c1}{\PYZsh{}ALPHABET=\PYZdq{}qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789\PYZdq{}}
+         \PY{n}{ALPHABET}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{LEN}\PY{o}{=}\PY{l+m+mi}{4}
+         
+         \PY{k}{def} \PY{n+nf}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{num\PYZus{}seq}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{num\PYZus{}seq}\PY{p}{)}
+                 \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{sha1}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{generated\PYZus{}hash}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{generated\PYZus{}hash}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} 
+                     \PY{o+ow}{and} \PY{n}{generated\PYZus{}hash}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{generated\PYZus{}hash}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} 
+                     \PY{o+ow}{and} \PY{n}{generated\PYZus{}hash}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{word}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gen:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{generated\PYZus{}hash}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i: ('Q', 'a', '4', 'q') gen: 0000017073f651142c381e79907f15f5a4f5b211
+i: ('I', 'v', 'x', 'Z') gen: 000002edfd74a39574f3ed02d9731e665a4051bd
+i: ('O', 'w', 'U', 'H') gen: 000009b40ea64bea63cf2f21bd7efe845cd756c5
+i: ('D', 'O', 'H', 'w') gen: 0000066bfe3a49a5a5f21aff4712701162f923dc
+i: ('K', '1', 'J', '4') gen: 000003daf52cbc4c15d6645efa1efdacffca1b7a
+i: ('Z', '1', 'Y', 'O') gen: 00000eb43f8ca7b97d3b43c539f87d1e505f9d42
+i: ('B', 'K', 'k', 'h') gen: 000005bf7c5b6f639306b0f8ed15cce814717016
+i: ('u', '7', 'b', 'y') gen: 000007d73f592343a4a994f663ea79ee52dcfce1
+i: ('i', '8', '8', 'n') gen: 000007f93b250ba40faeb87a7e825adf823c063b
+i: ('l', 'D', 's', 'h') gen: 000007c6e45c28c88b1e8d85f0ccc138c1f1ce55
+i: ('n', 'J', 't', '6') gen: 000008f129fcc20da0cb304656861e108b3916d7
+i: ('0', 'c', 'v', 'm') gen: 000004791b5446dfe6916a5a681f70de191a4956
+i: ('3', 'P', '7', 'M') gen: 000006cef92e331954423e6575a21c85853f106a
+i: ('4', 'g', 'n', 'h') gen: 0000075d811fdb5ccb2ecec23069094d6246ec7c
+i: ('6', 'K', 'a', 'I') gen: 0000003bb669bea659d8182363003d90a47311e9
+
+    \end{Verbatim}
+
+    \hypertarget{exercise-6-short-password}{%
+\section{Exercise \#6: Short password}\label{exercise-6-short-password}}
+
+    L'attacco Bruteforce è la modalità di cracking più potente, può provare
+tutte le possibili combinazioni di caratteri come password. Tuttavia,
+cracking con metodi esaustivi non finirà mai a causa del numero di
+combinazioni che sono troppo grandi. In questo esercizio abbiamo
+applicato alcuni vincoli per ottenere il lavoro fatto in un tempo
+ragionevole. Il 06\_short\_password\_cracking cartella contiene alcune
+password hash. Applicare un Bruteforce al fine di recuperare le password
+in chiaro, sapendo che sono 5 caratteri e contiene solo i caratteri
+minuscoli. L'elenco di password recuperati deve essere inviata.
+
+Suggerimenti: per risolvere i problemi sopra menzionati può essere molto
+utile per utilizzare il seguente libreria Python: hashlib
+
+Codice sorgente: Lib/hashlib.py Questo modulo implementa un'interfaccia
+comune a molti diversi secure hash e message algorithms digest. Inclusi
+il FIPS secure hash algorithms SHA1, SHA224, SHA256, SHA384 e SHA512
+(definito in FIPS 180-2), così come l'algoritmo MD5 di RSA (definito in
+Internet RFC 1321). I termini ``secure hash'' e ``message digest'' sono
+intercambiabili. Algoritmi più vecchi sono stati chiamati message
+digest. Il termine moderno è secure hash. Maggiori informazioni
+https://docs.python.org/3/library/hashlib.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{hashlib} \PY{k}{as} \PY{n+nn}{hs}
+        \PY{k+kn}{import} \PY{n+nn}{base64} \PY{k}{as} \PY{n+nn}{b}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{itertools} \PY{k}{as} \PY{n+nn}{it}
+        
+        \PY{n}{ALPHABET}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{abcdefghijklmnopqrstuvwxyz}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{LEN}\PY{o}{=}\PY{l+m+mi}{5}
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hacked\PYZus{}passwords.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}
+        \PY{n}{password}\PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+        \PY{n}{data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}          0                                                  1
+        0    user1  94d8fe2cffbe16b26a3ac857188c729bd3a43544f808ea{\ldots}
+        1    user2           ba324ca7b1c77fc20bb970d5aff6eea9377918a5
+        2    user3           3e38e5ce4283f06de4b83ad13af081abc5e16740
+        3    user4                   d78b6f30225cdc811adfe8d4e7c9fd34
+        4    user5           d0be2dc421be4fcd0172e5afceea3970e2f3d940
+        5    user6                   d41d8cd98f00b204e9800998ecf8427e
+        6    user7  8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4b{\ldots}
+        7    user8                   a270bb19c22d88bd2a4046f1c304db2c
+        8    user9           a62f2225bf70bfaccbc7f1ef2a397836717377de
+        9   user10                   7e60bc642fefc11b43792e8745df6c1d
+        10  user11                   f7bd616b6c841d2538735f76d1e02b57
+        11  user12                   f7531e2d0ea27233ce00b5f01c5bf335
+        12  user13                   43b9d8ea18c48c3a64c4e37338fc668f
+        13  user14                   1df3746a4728276afdc24f828186f73a
+        14  user15                   63d721d24d2dde776e05e4b8c47f08a3
+        15  user16                   f7a42fe7211f98ac7a60a285ac3a9e87
+        16  user17                   4e1566f0798fb3d6f350720cacd74446
+        17  user18                   326577fbe6d73973bd67437829bf9301
+        18  user19                   5e93de3efa544e85dcd6311732d28f95
+        19  user20                   9726255eec083aa56dc0449a21b33190
+        20   admin  94f94c9c97bfa92bd267f70e2abd266b069428c282f30a{\ldots}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{md5\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{md5}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+            
+        \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{md5\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)} 
+                \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user11 is: crypt
+The password of user user10 is: cyber
+The password of user user8 is: locky
+The password of user user13 is: macos
+The password of user user20 is: money
+The password of user user16 is: phone
+The password of user user12 is: print
+The password of user user19 is: pwned
+The password of user user14 is: quick
+The password of user user18 is: virus
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{LEN}\PY{o}{=}\PY{l+m+mi}{4}
+         \PY{k}{def} \PY{n+nf}{md5\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                 \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{md5}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{md5\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)} 
+                 \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,} 
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user17 is: cost
+The password of user user15 is: gate
+The password of user user4 is: hack
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{sha1}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+            
+        \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user5 is: apple
+The password of user user2 is: linux
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{sha256\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{sha256}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{sha256\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user7 is: admin
+The password of user admin is: crack
+The password of user user1 is: laser
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{def} \PY{n+nf}{sha512\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                 \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{sha512}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{sha512\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{LEN}\PY{o}{=}\PY{l+m+mi}{4}
+         \PY{k}{def} \PY{n+nf}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                 \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{sha1}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,} 
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user3 is: bugs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{LEN}\PY{o}{=}\PY{l+m+mi}{3}
+         \PY{k}{def} \PY{n+nf}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                 \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{sha1}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n}{LEN}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{sha1\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user9 is: key
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{ris}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{md5}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d41d8cd98f00b204e9800998ecf8427e}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{ris}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{md5\PYZus{}hash}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{string}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{char\PYZus{}sequence}\PY{p}{)}
+                 \PY{n}{hash\PYZus{}object}\PY{o}{=}\PY{n}{hs}\PY{o}{.}\PY{n}{md5}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{hash\PYZus{}object}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n}{ALPHABET}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{generated\PYZus{}hash}\PY{o}{=}\PY{n}{md5\PYZus{}hash}\PY{p}{(}\PY{n}{word}\PY{p}{)} 
+                 \PY{k}{if} \PY{n}{generated\PYZus{}hash} \PY{o+ow}{in} \PY{n}{password}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The password of user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{==}\PY{n}{generated\PYZus{}hash}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{word}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The password of user user6 is: 
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

