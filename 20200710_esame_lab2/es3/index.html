@@ -1,0 +1,215 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Blog</title>
+    <link href="css/foundation.css" rel="stylesheet" />
+    <link href="css/header.css" rel="stylesheet" />
+    <link href="css/icon-fonts.css" rel="stylesheet" />
+    <link href="css/hover.css" rel="stylesheet" />
+    <link href="css/footer-bottom.css" rel="stylesheet" />
+    <link href="css/menu.css" rel="stylesheet" />
+    <link href="css/blog.css" rel="stylesheet" />
+    <link href="css/fonts.css" rel="stylesheet" />
+    <link href="css/color.css" rel="stylesheet" />
+    <script src="js/modernizr.js"></script>
+</head>
+
+<body>
+    <div class="fixed">
+        <!-- Header and Nav -->
+        <nav class="top-bar" data-topbar>
+            <ul class="title-area">
+                <!-- Title Area -->
+                <li class="name">
+                    <h1>
+                        <a href="./">Website Name
+                        </a>
+                    </h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#">
+                        <span>Menu</span>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+    <div class="content-wrapper">
+        <section id="main-content">
+
+            <!-- Main Page Content and Sidebar -->
+
+            <div class="row">
+
+                <!-- Main Blog Content -->
+                <div class="large-9 columns" role="content">
+			<div id="box-post">
+
+                    <article>
+
+                        <h1><a href="#">Very first</a></h1>
+                        <p class="article_pub-date">Published
+                            <time datetime="2014-05-13" pubdate="">May 13, 2014</time>
+                        </p>
+
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <p>This is the first blog post.</p>
+                                </div>
+                        </div>
+                    </article>
+
+                    <hr />
+
+                    <article>
+
+                        <h1><a href="#">Second post</a></h1>
+                        <p class="article_pub-date">Published
+                            <time datetime="2014-05-13" pubdate="">May 13, 2016</time>
+                        </p>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <p>Another post. At this time we want to demostrate that is possible to insert new blog post!</p>
+                                </div>
+                        </div>
+                    </article>
+			</div>
+
+			<hr />
+
+                    <article>
+
+                        <h1><a href="#">New post</a></h1>
+                        <div class="row">
+                            <div class="large-12 columns">
+				  <h6>Title:</h6><br>
+				  <input type="text" id="title" name="title" placeholder="John"><br>
+				  <h6>Text:</h6><br>
+				  <textarea type="text" id="text" name="text" value="Your text here"></textarea><br><br>
+				  <input type="submit" value="Submit" onclick="add()">
+				
+                               </div>
+                        </div>
+                    </article>
+
+		<hr />
+		<article>
+		
+		</article>
+
+
+
+                </div>
+
+                <!-- End Main Content -->
+
+
+                <!-- Sidebar -->
+
+                <aside class="large-3 columns">
+
+                    <h5>Categories</h5>
+                    <div class="ui secondary vertical pointing menu">
+                        <a href="#" class="active item">News</a>
+                        <a href="#" class="item">Code</a>
+                        <a href="#" class="item">Design</a>
+                        <a href="#" class="item">Fun</a>
+                        <a href="#" class="item">Weasels</a>
+                    </div>
+
+                    <div class="ui vertical menu">
+                        <div class="header item">
+                            <i class="icon-page"></i>
+                            Recent Posts
+                        </div>
+
+                        <div class="item">
+                            <a href="#"><h6>Pork Sausage News!</h6> <p>Pork sausages health benefits proved by government...</p></a>
+                        </div>
+                        <div class="item">
+                            <a href="#"><h6>More Amazing Pork Sausage News!</h6> <p>Pork sausages better than viagra...</p></a>
+                        </div>
+                    </div>
+
+                    <div class="ui vertical menu">
+                        <div class="header item">
+                            <i class="icon-page"></i>
+                            Popular Posts
+                        </div>
+                        <div class="item">
+                            <a href="#"><h6>Pork Sausage News!</h6> <p>Pork sausages health benefits proved by government...</p></a>
+                        </div>
+                        <div class="item">
+                            <a href="#"><h6>More Amazing Pork Sausage News!</h6> <p>Pork sausages better than viagra...</p></a>
+                        </div>
+                    </div>            
+                </aside>
+
+                <!-- End Sidebar -->
+            </div>
+
+            <!-- End Main Content and Sidebar -->
+
+        </section>
+        <div class="page-footer-bottom">
+            <div class="row">
+                <div class="medium-4 medium-4 push-8 columns">
+
+                    <ul class="home-social">
+                        <li>
+                            <a href="http://www.twitter.com/" class="twitter"></a>
+                        </li>
+                        <li>
+                            <a href="http://www.facebook.com/" class="facebook"></a>
+                        </li>
+                        <li>
+                            <a href="/contact" class="mail"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="medium-8 medium-8 pull-4 columns">
+                    <ul class="site-links">
+                        <li class="name">
+                            <a href="./">Website Name</a>
+                        </li>
+                        <li>
+                            <a href="./">Home</a>
+                        </li>
+                        <li>
+                            <a href="./">Blog</a>
+                        </li>
+                        <li>
+                            <a href="./">News & Events</a>
+                        </li>
+                    </ul>
+                    <p class="copyright">© 2020 Not so secure website. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+	<script>
+		function add(){
+			title = document.getElementById("title").value;	
+			text = document.getElementById("text").value;	
+
+			title = title.replace('script', '').replace('<S','').replace('<s','').replace('t>','').replace('T>','');
+			text = text.replace('script', '').replace('<S','').replace('<s','').replace('t>','').replace('T>','');
+
+			var div = document.getElementById("box-post");
+			div.innerHTML += "<hr /><article><h1><a href='#'>"+title+"</a></h1><p class='article_pub-date'>Published<time datetime='2014-05-13' >May 13, 2016</time></p><div class='row'><div class='large-12 columns'><p>"+text+"</p></div></div></article>";	
+		}
+	</script>
+</body>
+
+</html>

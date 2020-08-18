@@ -1,0 +1,2 @@
+//used john as always but --format=A_FORMAT is needed, tried all suggested formats until I got all the passwords
+sudo john --wordlist:xato-net-10-million-passwords.txt --format=A_FORMAT password*

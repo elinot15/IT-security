@@ -1,0 +1,10 @@
+// wrote a python script that generates every key permutation given a set ('a-z'+'A-Z', defined as keyDomain) and a length
+// the key is XORed with the ciphertext and printable results are kept (subset of string.printable tbh, defined as ptDomain)
+// a language filter is applied too (https://pypi.org/project/langdetect/)
+// ciphertext file path, length & language are passed as a parameters
+// example: > python xor.py /path_to_file(default: ./encrypted.txt) Key_Length(default: 2) Language(default: all)
+// the parameters can be omitted right to left, in this case default ones are used
+// for this specific exercize I used:
+python xor.py
+// which returned the right plaintext & key
+// in case of multiple plaintexts, output redirection might the right choice

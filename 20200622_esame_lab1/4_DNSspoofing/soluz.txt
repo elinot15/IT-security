@@ -1,0 +1,15 @@
+1. mettere bridge in impostazione rete vb
+2. accendere kali
+3. lanciare server apache su host e vm <- sudo service apache2 start
+4. modificare /var/www/html/index.html se si vuole cambiare pagina di default in localhost<- sudo echo prova DNS spoofing > index.html (ho fatto con vim io)
+5. modificare /etc/ettercap/etter.dns inserendo NOME_SITO IP_KALI
+	es. www.google.com 192.168.178.102
+	    *.*.*	   192.168.178.102 <- IP_KALI: sudo ifconfig
+6. lanciare ettercap
+7. stoppare sniffing
+8. fare host scan
+9. selezionare target1 IP host e target2 IP Gateway da host list (gli IP si trovano in impostaioni rete su host)
+10. selezionare ARP POISONING 
+11. selezionare plugins -> seleziona plin -> double click su 1.3 dns spoofing
+12. riattivare sniffing
+13. cercare sito su host, verra rediretto a index.html di vm
